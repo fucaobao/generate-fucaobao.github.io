@@ -101,7 +101,7 @@ disqus:
 # Site share setting
 #---------------------------------------------------------------
 duoshuo_share:
-    enable: true
+    enable: false
 
 #---------------------------------------------------------------
 # Site analysis setting
