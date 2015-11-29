@@ -21,7 +21,6 @@ function walk(path) {
         var stats = fs.statSync(item);
         if (stats.isDirectory()) {
             if (depths > maxDepths) {
-                console.log(item);
                 throw new Error('depths out of range, max depths is ' + maxDepths);
             }
             walk(item);
@@ -53,7 +52,7 @@ function isIMAGE(filename) {
 }
 
 function isCSS(filename) {
-    var css = ['css'];
+    var css = ['css', 'scss', 'sass', 'less'];
     var suffix = getSuffix(filename);
     if (css.indexOf(suffix) === -1) {
         return false;

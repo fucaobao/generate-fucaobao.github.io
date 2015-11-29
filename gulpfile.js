@@ -1,9 +1,10 @@
 var gulp = require('gulp');
 var gulpSequence = require('gulp-sequence');//按顺序执行
 var uglify = require('gulp-uglify');        //压缩JS
-var sass = require('gulp-sass');
+var sass = require('gulp-ruby-sass');       //编译sass/scss文件，，不会编译_开头的scss/sass文件
 var minifyCss = require('gulp-minify-css'); //压缩CSS
 var imagemin = require('gulp-imagemin');    //压缩图片
+var htmlmin = require('gulp-htmlmin');      //压缩HTML
 var del = require('del');                   //删除文件
 var fs = require('fs');                     //文件操作
 var walk = require('./walk')('./assets');
@@ -15,7 +16,6 @@ var paths = {
     other: walk.other,
     build: 'build'
 };
-
 gulp.task('clean', function (callback) {
     del(paths.build, callback);
 });
@@ -30,12 +30,14 @@ gulp.task('js', function () {
         }));
 });
 gulp.task('css', function () {
-    return gulp.src(paths.css)
-        .pipe(sass().on('error', sass.logError))
+    return sass(paths.css)
         .pipe(minifyCss())
         .pipe(gulp.dest(function(file){
             var base = file.base,
                 cwd = file.cwd;
+            if(base.indexOf(cwd) === -1){
+                return paths.build + '/' + base; 
+            }
             return paths.build + '/' + base.substring(cwd.length + 1);
         }));
 });
@@ -50,6 +52,7 @@ gulp.task('image', function () {
 });
 gulp.task('html', function () {
     return gulp.src(paths.html)
+        .pipe(htmlmin())
         .pipe(gulp.dest(function(file){
             var base = file.base,
                 cwd = file.cwd;
