@@ -85,24 +85,24 @@ socials:
 # Site comment setting
 #---------------------------------------------------------------
 
-comment:
-  enable: true
+# comment:
+#   enable: false
 
 # duoshuo
-duoshuo:
-  enable: true
-  short_name: "fucaobao"
+# duoshuo:
+#   enable: true
+#   short_name: "fucaobao"
 
 # disqus
-disqus:
-  enable: false
-  short_name: "your disqus short_name"
+# disqus:
+#   enable: false
+#   short_name: "your disqus short_name"
 
 #---------------------------------------------------------------
 # Site share setting
 #---------------------------------------------------------------
-duoshuo_share:
-    enable: false
+# duoshuo_share:
+#     enable: false
 
 #---------------------------------------------------------------
 # Site analysis setting
